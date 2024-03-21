@@ -19,11 +19,13 @@ services:
       - 3001:3001
     labels:
       - "com.centurylinklabs.watchtower.scope=hub"
+    platform: linux/amd64
   proverbs-for-code:
     image: jaywhy13/proverbs-for-code
     ports:
       - 3002:80
     labels:
       - "com.centurylinklabs.watchtower.scope=hub"
+    platform: linux/amd64
     environment:
       - VIRTUAL_HOST=proverbs.hub.me
