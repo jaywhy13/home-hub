@@ -1,10 +1,17 @@
-version: "3"
+version: "2"
 services:
   watchtower:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --interval 3600 --debug --log-level debug --scope hub
+  proxy:
+    image: nginxproxy/nginx-proxy:1.5
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
   proverbs-for-code-backend:
     image: jaywhy13/proverbs-for-code-backend
     env_file: .env/proverbs-for-code-backend
@@ -18,3 +25,5 @@ services:
       - 3002:80
     labels:
       - "com.centurylinklabs.watchtower.scope=hub"
+    environment:
+      - VIRTUAL_HOST=proverbs.hub.me
