@@ -7,3 +7,11 @@ start:
 stop:
 		@echo "Powering down the hub..."
 		@docker-compose down
+
+restart:
+		@echo "Restarting the hub..."
+		@docker-compose stop 
+		@docker-compose up -d
+
+logs:
+		@docker-compose logs -f 
